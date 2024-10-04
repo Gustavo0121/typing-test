@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "typing-test"
+version = "0.1.0"
+description = ""
+authors = ["Gustavo0121 <gus0512san@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.14"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-cov = "^5.0.0"
+taskipy = "^1.13.0"
+
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.6.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
