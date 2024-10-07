@@ -7,7 +7,8 @@ import flet as ft
 from application.view import pages
 
 routes = {
-    '/': pages.main_view,
+    '/': pages.start_view,
+    '/typing': pages.typing_view,
 }
 
 

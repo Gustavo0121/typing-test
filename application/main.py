@@ -1,4 +1,5 @@
 """Main."""
+
 import sys
 from pathlib import Path
 
@@ -31,9 +32,11 @@ def main(page: ft.Page) -> None:
     page.on_view_pop = view_pop
     page.go('/')
 
+
 def app():
     """Run app."""
     ft.app(target=main, assets_dir='assets')
+
 
 if __name__ == '__main__':
     app()
