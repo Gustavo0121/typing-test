@@ -17,6 +17,7 @@ class Typing(ft.View):
         self.padding = 50
         self.bgcolor = '#181717'
         self.text = text
+        self.seconds = 0
         self.campo_texto = ft.TextField(
             autofocus=True,
             border=ft.InputBorder.NONE,
@@ -57,6 +58,12 @@ class Typing(ft.View):
     def on_change(self, event: ft.ControlEvent) -> None:
         """On change."""
         len_field = len(self.campo_texto.value)
+        if len_field == 1:
+            self.update_counter(event)
+
+        if len_field == len(self.text):
+            event.page.go('/statistics')
+
         if self.campo_texto.value[-1] == self.text[len_field - 1]:
             self.campo_texto.color = '#890606'
             print('certo')
@@ -70,3 +77,12 @@ class Typing(ft.View):
             sleep(0.5)
             self.campo_texto.color = '#890606'
             event.page.update()
+
+    def update_counter(self, event:ft.ControlEvent) -> None:
+        """Update counter seconds."""
+        while event.page.route == '/typing':
+            self.seconds += 1
+            self.controls[0].value = f'{self.seconds//60}:{self.seconds%60}'
+            event.page.update()
+            sleep(1)
+            print('seconds')
