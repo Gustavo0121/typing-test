@@ -3,7 +3,6 @@
 import logging
 
 import flet as ft
-from pathlib import Path
 from application.view.start import Start
 from application.view.typing import Typing
 
@@ -15,7 +14,7 @@ def start_view(e: ft.ControlEvent) -> ft.Control:
 
 
 def typing_view(e: ft.ControlEvent) -> ft.Control:
-    """typing view."""
+    """Typing view."""
     logging.debug(e)
     return Typing(e, route='/typing')
 

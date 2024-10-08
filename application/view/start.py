@@ -47,13 +47,17 @@ class Start(ft.View):
                         controls=[
                             ft.Container(
                                 content=ft.Text(
-                                    'Typing test', color='#890606', size=100
+                                    'Typing test',
+                                    color='#890606',
+                                    size=100,
                                 ),
                                 offset=ft.Offset(x=0.505, y=0),
                             ),
                             ft.Container(
                                 content=ft.Text(
-                                    'Typing test', color='#A40000', size=100
+                                    'Typing test',
+                                    color='#A40000',
+                                    size=100,
                                 ),
                                 offset=ft.Offset(x=-0.505, y=0),
                             ),

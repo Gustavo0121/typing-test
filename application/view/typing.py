@@ -1,7 +1,9 @@
 """Typing view."""
 
-import flet as ft
 from time import sleep
+
+import flet as ft
+
 
 class Typing(ft.View):
     """Typing class."""
@@ -14,7 +16,8 @@ class Typing(ft.View):
         self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
         self.padding = 50
         self.bgcolor = '#181717'
-        self.text = """You must be the change you wish to see in the world.""".lower().strip()
+        self.text = 'You must be the change you wish'
+        'to see in the world.'.lower()
         self.campo_texto = ft.TextField(
             autofocus=True,
             border=ft.InputBorder.NONE,
@@ -33,9 +36,12 @@ class Typing(ft.View):
                             controls=[
                                 ft.Text(
                                     self.text,
-                                    color=ft.colors.with_opacity(0.3, '#890606'),
+                                    color=ft.colors.with_opacity(
+                                        0.3,
+                                        '#890606',
+                                    ),
                                     size=60,
-                                    style=ft.TextStyle(word_spacing=1)
+                                    style=ft.TextStyle(word_spacing=1),
                                 ),
                             ],
                         ),

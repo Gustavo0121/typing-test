@@ -7,9 +7,11 @@ sys.path.append(
     Path(__file__).parents[1].resolve().as_posix(),
 )
 
-import os
-import flet as ft
 import logging
+import os
+
+import flet as ft
+
 from application.view.router import route_change, view_pop
 
 if os.getenv('DEBUG_MODE'):

@@ -1,7 +1,7 @@
 """Main module."""
 
-from pathlib import Path
 import logging
+from pathlib import Path
 
 __title__ = '.'.join(Path(__file__).parent.parts[-2:])
 
