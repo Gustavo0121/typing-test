@@ -1,7 +1,7 @@
 """Typing view."""
 
 import flet as ft
-
+from time import sleep
 
 class Typing(ft.View):
     """Typing class."""
@@ -66,4 +66,7 @@ So long lives this, and this gives life to thee
             list_txt[-1] = self.text[len_field - 1]
             self.campo_texto.value = ''.join(list_txt)
             self.campo_texto.color = 'white'
-        event.page.update()
+            event.page.update()
+            sleep(0.5)
+            self.campo_texto.color = '#890606'
+            event.page.update()
