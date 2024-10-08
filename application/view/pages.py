@@ -5,6 +5,7 @@ import logging
 import flet as ft
 from application.view.start import Start
 from application.view.typing import Typing
+from application.controllers.phrases import phrases
 
 
 def start_view(e: ft.ControlEvent) -> ft.Control:
@@ -16,7 +17,7 @@ def start_view(e: ft.ControlEvent) -> ft.Control:
 def typing_view(e: ft.ControlEvent) -> ft.Control:
     """Typing view."""
     logging.debug(e)
-    return Typing(e, route='/typing')
+    return Typing(e, route='/typing', text=phrases[0].lower())
 
 
 def not_found_view(e: ft.ControlEvent) -> ft.Control:

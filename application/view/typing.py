@@ -8,7 +8,7 @@ import flet as ft
 class Typing(ft.View):
     """Typing class."""
 
-    def __init__(self, events: ft.ControlEvent, **kwargs: str):
+    def __init__(self, events: ft.ControlEvent, text: str, **kwargs: str):
         """Init for Start class."""
         super().__init__()
         self.events = events
@@ -16,12 +16,11 @@ class Typing(ft.View):
         self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
         self.padding = 50
         self.bgcolor = '#181717'
-        self.text = 'You must be the change you wish'
-        'to see in the world.'.lower()
+        self.text = text
         self.campo_texto = ft.TextField(
             autofocus=True,
             border=ft.InputBorder.NONE,
-            text_size=60,
+            text_size=50,
             multiline=True,
             on_change=self.on_change,
             color='#890606',
@@ -40,7 +39,7 @@ class Typing(ft.View):
                                         0.3,
                                         '#890606',
                                     ),
-                                    size=60,
+                                    size=50,
                                     style=ft.TextStyle(word_spacing=1),
                                 ),
                             ],
