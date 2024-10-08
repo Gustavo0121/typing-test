@@ -1,7 +1,7 @@
 """Statistics."""
 
 import flet as ft
-
+from application import seconds, result
 
 class Statistics(ft.View):
     """Statistics view."""
@@ -14,3 +14,15 @@ class Statistics(ft.View):
         self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
         self.padding = 50
         self.bgcolor = '#181717'
+        self.controls=[
+            ft.Text(str(seconds[-1] + 1), color='#A40000', size=100),
+            ft.Text(f'erros: {str(result['erros'])}, acertos: {str(result['acertos'])}', color='#A40000', size=100),
+            ft.TextButton('Next', on_click=self.to_enter)
+        ]
+
+    def to_enter(self, event: ft.ControlEvent) -> None:
+        """To enter."""
+        seconds.clear()
+        result['erros'] = 0
+        result['acertos'] = 0
+        event.page.go('/typing')
