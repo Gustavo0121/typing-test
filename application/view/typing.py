@@ -3,7 +3,7 @@
 from time import sleep
 
 import flet as ft
-from application import seconds, result, phrases
+from application import seconds, result, attempts
 
 class Typing(ft.View):
     """Typing class."""
@@ -79,6 +79,8 @@ class Typing(ft.View):
 
         if len_field == len(self.text):
             print(f'total segundos {seconds}')
+            attempts.append([str(seconds[-1] + 1), str(result['erros']), str(result['acertos'])])
+            print(attempts)
             event.page.go('/statistics')
 
     def update_counter(self, event:ft.ControlEvent) -> None:
