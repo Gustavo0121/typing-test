@@ -21,7 +21,7 @@ phrases: list = [
     'In this life, we cannot do great things. We can only do small things with great love',
     "Don't worry when you are not recognized but strive to be worthy of recognition",
     'The greatest glory in living lies not in never falling, but in rising every time we fall',
-    "Go confidently in the direction of your dreams! Live the life you've imagined",
+    "Go confidently in the direction of your dreams Live the life you've imagined",
     'So we beat on, boats against the current, borne back ceaselessly into the past',
     "Keep smiling, because life is a beautiful thing and there's so much to smile about",
 ]

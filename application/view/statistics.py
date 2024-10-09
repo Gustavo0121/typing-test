@@ -19,10 +19,12 @@ class Statistics(ft.View):
                 content=ft.Column(
                     controls=[],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    scroll=ft.ScrollMode.ALWAYS,
                 ),
                 border=ft.border.all(7, '#640000'),
                 height=800,
                 width=500,
+                bgcolor='#0F0F0F'
             ),
             ft.TextButton('Next', on_click=self.to_enter),
         ]
@@ -40,7 +42,6 @@ class Statistics(ft.View):
         phrases.append(phrases[0])
         phrases.pop(0)
         event.page.go('/typing')
-
 
     def build_controls(self, idx: int, attempt: list) -> list[ft.Control]:
         """Build the body of controls from view."""
