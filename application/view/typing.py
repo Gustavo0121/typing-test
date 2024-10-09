@@ -3,12 +3,12 @@
 from time import sleep
 
 import flet as ft
-
+from application import seconds, result, attempts
 
 class Typing(ft.View):
     """Typing class."""
 
-    def __init__(self, events: ft.ControlEvent, **kwargs: str):
+    def __init__(self, events: ft.ControlEvent, text: str, **kwargs: str):
         """Init for Start class."""
         super().__init__()
         self.events = events
@@ -16,12 +16,11 @@ class Typing(ft.View):
         self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
         self.padding = 50
         self.bgcolor = '#181717'
-        self.text = 'You must be the change you wish'
-        'to see in the world.'.lower()
+        self.text = text
         self.campo_texto = ft.TextField(
             autofocus=True,
             border=ft.InputBorder.NONE,
-            text_size=60,
+            text_size=50,
             multiline=True,
             on_change=self.on_change,
             color='#890606',
@@ -40,7 +39,7 @@ class Typing(ft.View):
                                         0.3,
                                         '#890606',
                                     ),
-                                    size=60,
+                                    size=50,
                                     style=ft.TextStyle(word_spacing=1),
                                 ),
                             ],
@@ -57,12 +56,18 @@ class Typing(ft.View):
 
     def on_change(self, event: ft.ControlEvent) -> None:
         """On change."""
+
         len_field = len(self.campo_texto.value)
+        if len_field == 1:
+            self.update_counter(event)
+
+
         if self.campo_texto.value[-1] == self.text[len_field - 1]:
-            self.campo_texto.color = '#890606'
             print('certo')
+            result['acertos'] += 1
         else:
             print('errado')
+            result['erros'] += 1
             list_txt = list(self.campo_texto.value)
             list_txt[-1] = self.text[len_field - 1]
             self.campo_texto.value = ''.join(list_txt)
@@ -71,3 +76,20 @@ class Typing(ft.View):
             sleep(0.5)
             self.campo_texto.color = '#890606'
             event.page.update()
+
+        if len_field == len(self.text):
+            print(f'total segundos {seconds}')
+            attempts.append([str(seconds[-1] + 1), str(result['erros']), str(result['acertos'])])
+            print(attempts)
+            event.page.go('/statistics')
+
+    def update_counter(self, event:ft.ControlEvent) -> None:
+        """Update counter seconds."""
+        secs = 0
+        while event.page.route == '/typing':
+            secs += 1
+            self.controls[0].value = f'{secs//60}:{secs%60}'
+            event.page.update()
+            sleep(1)
+            print(secs)
+            seconds.append(secs)

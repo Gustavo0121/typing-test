@@ -9,6 +9,7 @@ from application.view import pages
 routes = {
     '/': pages.start_view,
     '/typing': pages.typing_view,
+    '/statistics': pages.statistics_view,
 }
 
 
