@@ -3,7 +3,7 @@
 from time import sleep
 
 import flet as ft
-from application import seconds, result
+from application import seconds, result, phrases
 
 class Typing(ft.View):
     """Typing class."""

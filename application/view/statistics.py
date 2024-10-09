@@ -1,7 +1,7 @@
 """Statistics."""
 
 import flet as ft
-from application import seconds, result
+from application import seconds, result, phrases
 
 class Statistics(ft.View):
     """Statistics view."""
@@ -25,4 +25,6 @@ class Statistics(ft.View):
         seconds.clear()
         result['erros'] = 0
         result['acertos'] = 0
+        phrases.append(phrases[0])
+        phrases.pop(0)
         event.page.go('/typing')

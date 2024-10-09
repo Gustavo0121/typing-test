@@ -3,7 +3,7 @@
 import logging
 
 import flet as ft
-from application.controllers.phrases import phrases
+from application import phrases
 from application.view.start import Start
 from application.view.statistics import Statistics
 from application.view.typing import Typing
