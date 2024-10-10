@@ -24,9 +24,19 @@ class Statistics(ft.View):
                 border=ft.border.all(7, '#640000'),
                 height=800,
                 width=500,
-                bgcolor='#0F0F0F'
+                bgcolor='#0F0F0F',
             ),
-            ft.TextButton('Next', on_click=self.to_enter),
+            ft.TextButton(
+                content=ft.Text('Next', size=30),
+                on_click=self.to_enter,
+                style=ft.ButtonStyle(
+                    bgcolor='#0F0F0F',
+                    color='#640000',
+                    shape=ft.BeveledRectangleBorder(radius=10)
+                ),
+                width=150,
+                height=60,
+            ),
         ]
 
         for idx, attempt in enumerate(attempts,start=1):
@@ -42,6 +52,13 @@ class Statistics(ft.View):
         phrases.append(phrases[0])
         phrases.pop(0)
         event.page.go('/typing')
+
+    def on_hover(self, event: ft.ControlEvent) -> None:
+        """On hover."""
+        event.control.bgcolor = (
+            '#000000' if event.data == 'true' else '#0F0F0F'
+        )
+        event.control.update()
 
     def build_controls(self, idx: int, attempt: list) -> list[ft.Control]:
         """Build the body of controls from view."""
