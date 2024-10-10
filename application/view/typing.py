@@ -58,9 +58,6 @@ class Typing(ft.View):
         """On change."""
 
         len_field = len(self.campo_texto.value)
-        if len_field == 1:
-            self.update_counter(event)
-
 
         if self.campo_texto.value[-1] == self.text[len_field - 1]:
             print('certo')
@@ -73,9 +70,13 @@ class Typing(ft.View):
             self.campo_texto.value = ''.join(list_txt)
             self.campo_texto.color = 'white'
             event.page.update()
-            sleep(0.5)
+            sleep(0.2)
             self.campo_texto.color = '#890606'
             event.page.update()
+
+        if len_field == 1:
+            sleep(1)
+            self.update_counter(event)
 
         if len_field == len(self.text):
             print(f'total segundos {seconds}')
