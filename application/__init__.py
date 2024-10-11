@@ -2,11 +2,14 @@
 
 import logging
 from pathlib import Path
+from collections import defaultdict
 
 __title__ = '.'.join(Path(__file__).parent.parts[-2:])
 
 confproject = Path(__file__).parents[1] / 'pyproject.toml'
 versionfile = Path(__file__).parent / 'version.txt'
+better_temp: defaultdict = defaultdict(lambda: better_temp[1])
+better_utilization: defaultdict = defaultdict(lambda: better_utilization[1])
 seconds: list = []
 result: dict = {
     'erros': 0,
@@ -25,6 +28,7 @@ phrases: list = [
     'So we beat on, boats against the current, borne back ceaselessly into the past',
     "Keep smiling, because life is a beautiful thing and there's so much to smile about",
 ]
+
 
 
 if __name__ == '__main__':  # pragma: no cover

@@ -60,10 +60,8 @@ class Typing(ft.View):
         len_field = len(self.campo_texto.value)
 
         if self.campo_texto.value[-1] == self.text[len_field - 1]:
-            print('certo')
             result['acertos'] += 1
         else:
-            print('errado')
             result['erros'] += 1
             list_txt = list(self.campo_texto.value)
             list_txt[-1] = self.text[len_field - 1]
@@ -79,9 +77,8 @@ class Typing(ft.View):
             self.update_counter(event)
 
         if len_field == len(self.text):
-            print(f'total segundos {seconds}')
-            attempts.append([str(seconds[-1] + 1), str(result['erros']), str(result['acertos'])])
-            print(attempts)
+            attempts.append([seconds[-1] + 1, result['erros'], result['acertos']])
+            print(f'attempts: {attempts}')
             event.page.go('/statistics')
 
     def update_counter(self, event:ft.ControlEvent) -> None:
@@ -92,5 +89,4 @@ class Typing(ft.View):
             self.controls[0].value = f'{secs//60}:{secs%60}'
             event.page.update()
             sleep(1)
-            print(secs)
             seconds.append(secs)
