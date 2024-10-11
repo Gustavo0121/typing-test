@@ -43,6 +43,7 @@ class Statistics(ft.View):
                         bgcolor='#0F0F0F',
                     ),
                 ],
+                alignment=ft.MainAxisAlignment.CENTER,
             ),
             ft.TextButton(
                 content=ft.Text('Next', size=30),
@@ -115,7 +116,7 @@ class Statistics(ft.View):
     def build_controls(self, idx: int, attempt: list) -> list[ft.Control]:
         """Build the body of controls from view."""
         return [
-            ft.Text(f'{idx}º attempt', color='#A40000', size=30),
+            ft.Text(f'{idx}º Tentativa', color='#A40000', size=30),
             ft.Text(f'Tempo total: {attempt[0]} segundos', color='#A40000', size=30),
             ft.Text(f'erros: {attempt[1]}, acertos: {attempt[2]}', color='#A40000', size=30),
             ft.Divider(color='#000000'),
@@ -124,15 +125,46 @@ class Statistics(ft.View):
     def build_podium(self) -> list[ft.Control]:
         """Build the controls of container podium."""
         return [
-            ft.Text('Média de tempo gasto'),
-            ft.Text(f'Tempo: {self.average:.1f} segundos'),
+            ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Text('Média de tempo gasto', color='#A40000', size=30),
+                        ft.Text(f'Tempo: {self.average:.1f} segundos', color='#A40000', size=30),
+                    ],
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    alignment=ft.MainAxisAlignment.CENTER,
+                ),
+                padding=ft.padding.only(top=25),
+                height=228,
+                width=486,
+            ),
             ft.Divider(color='#000000'),
-            ft.Text('Melhor tempo'),
-            ft.Text(f'{list(better_temp.keys())[-1]}º attempt', color='#A40000', size=30),
-            ft.Text(f'Tempo total: {better_temp[list(better_temp.keys())[-1]][0]} segundos', color='#A40000', size=30),
+            ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Text('Melhor tempo:', color='#A40000', size=30),
+                        ft.Text(f'{list(better_temp.keys())[-1]}º Tentativa', color='#A40000', size=30),
+                        ft.Text(f'Tempo total: {better_temp[list(better_temp.keys())[-1]][0]} segundos', color='#A40000', size=30),
+                    ],
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    alignment=ft.MainAxisAlignment.CENTER,
+                ),
+                height=228,
+                width=486,
+            ),
             ft.Divider(color='#000000'),
-            ft.Text('Melhor porcentagem de acertos'),
-            ft.Text(f'{list(better_utilization.keys())[-1]}º attempt', color='#A40000', size=30),
-            ft.Text(f'Porcentagem: {self.porcent_better:.1f}%'),
+            ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Text('Melhor porcentagem de acertos:', color='#A40000', size=30),
+                        ft.Text(f'{list(better_utilization.keys())[-1]}º Tentativa', color='#A40000', size=30),
+                        ft.Text(f'Porcentagem: {self.porcent_better:.1f}%', color='#A40000', size=30),
+                    ],
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    alignment=ft.MainAxisAlignment.CENTER,
+                ),
+                height=228,
+                width=486,
+            ),
             ft.Divider(color='#000000'),
         ]
