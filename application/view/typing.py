@@ -4,6 +4,7 @@ from time import sleep
 
 import flet as ft
 from application import seconds, result, attempts
+from application.controllers.controls import AppBar
 
 class Typing(ft.View):
     """Typing class."""
@@ -13,6 +14,7 @@ class Typing(ft.View):
         super().__init__()
         self.events = events
         self.route: str | None = kwargs.get('route')
+        self.appbar = AppBar(events)
         self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
         self.padding = 50
         self.bgcolor = '#181717'

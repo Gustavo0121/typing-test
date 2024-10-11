@@ -2,6 +2,7 @@
 
 import flet as ft
 from application import seconds, result, phrases, attempts, better_utilization, better_temp
+from application.controllers.controls import AppBar
 
 class Statistics(ft.View):
     """Statistics view."""
@@ -11,6 +12,7 @@ class Statistics(ft.View):
         super().__init__()
         self.events = events
         self.route: str | None = kwargs.get('route')
+        self.appbar = AppBar(events)
         self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
         self.padding = 50
         self.bgcolor = '#181717'
@@ -166,5 +168,4 @@ class Statistics(ft.View):
                 height=228,
                 width=486,
             ),
-            ft.Divider(color='#000000'),
         ]
