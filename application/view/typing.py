@@ -3,7 +3,9 @@
 from time import sleep
 
 import flet as ft
-from application import seconds, result, attempts
+from application import attempts, result, seconds
+from application.controllers.controls import AppBar
+
 
 class Typing(ft.View):
     """Typing class."""
@@ -13,6 +15,7 @@ class Typing(ft.View):
         super().__init__()
         self.events = events
         self.route: str | None = kwargs.get('route')
+        self.appbar = AppBar(events)
         self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
         self.padding = 50
         self.bgcolor = '#181717'
@@ -56,40 +59,39 @@ class Typing(ft.View):
 
     def on_change(self, event: ft.ControlEvent) -> None:
         """On change."""
-
         len_field = len(self.campo_texto.value)
-        if len_field == 1:
-            self.update_counter(event)
-
 
         if self.campo_texto.value[-1] == self.text[len_field - 1]:
-            print('certo')
             result['acertos'] += 1
         else:
-            print('errado')
             result['erros'] += 1
             list_txt = list(self.campo_texto.value)
             list_txt[-1] = self.text[len_field - 1]
             self.campo_texto.value = ''.join(list_txt)
             self.campo_texto.color = 'white'
             event.page.update()
-            sleep(0.5)
+            sleep(0.2)
             self.campo_texto.color = '#890606'
             event.page.update()
 
+        if len_field == 1:
+            sleep(1)
+            self.update_counter(event)
+
         if len_field == len(self.text):
-            print(f'total segundos {seconds}')
-            attempts.append([str(seconds[-1] + 1), str(result['erros']), str(result['acertos'])])
-            print(attempts)
+            attempts.append([
+                seconds[-1] + 1,
+                result['erros'],
+                result['acertos'],
+            ])
             event.page.go('/statistics')
 
-    def update_counter(self, event:ft.ControlEvent) -> None:
+    def update_counter(self, event: ft.ControlEvent) -> None:
         """Update counter seconds."""
         secs = 0
         while event.page.route == '/typing':
             secs += 1
-            self.controls[0].value = f'{secs//60}:{secs%60}'
+            self.controls[0].value = f'{secs // 60}:{secs % 60}'
             event.page.update()
             sleep(1)
-            print(secs)
             seconds.append(secs)
