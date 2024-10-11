@@ -1,8 +1,16 @@
 """Statistics."""
 
 import flet as ft
-from application import seconds, result, phrases, attempts, better_utilization, better_temp
+from application import (
+    attempts,
+    better_temp,
+    better_utilization,
+    phrases,
+    result,
+    seconds,
+)
 from application.controllers.controls import AppBar
+
 
 class Statistics(ft.View):
     """Statistics view."""
@@ -19,7 +27,7 @@ class Statistics(ft.View):
         self.porcent_better: float = 0
         self.temp_min: float = 0
         self.average: float = 0
-        self.controls=[
+        self.controls = [
             ft.Row(
                 controls=[
                     ft.Container(
@@ -53,48 +61,66 @@ class Statistics(ft.View):
                 style=ft.ButtonStyle(
                     bgcolor='#0F0F0F',
                     color='#640000',
-                    shape=ft.BeveledRectangleBorder(radius=10)
+                    shape=ft.BeveledRectangleBorder(radius=10),
                 ),
                 width=150,
                 height=60,
             ),
         ]
 
-        for idx, attempt in enumerate(attempts,start=1):
+        for idx, attempt in enumerate(attempts, start=1):
             controls_attempt = self.build_controls(idx, attempt)
             for control in controls_attempt:
                 self.controls[0].controls[0].content.controls.append(control)
 
-        for idx, attempt in enumerate(attempts,start=1):
+        for idx, attempt in enumerate(attempts, start=1):
             porcent_attempt = (attempt[2] / (attempt[1] + attempt[2])) * 100
             self.average += attempt[0]
             if len(attempts) == 1:
-                better_utilization[idx] = attempt
-                better_temp[idx] = attempt
-                self.temp_min = better_temp[idx][0]
-                self.porcent_better = porcent_attempt
-                self.average = attempt[0]
-                print(f'better_utilization: {better_utilization}')
-                print(f'better_temp: {better_temp}')
-                controls_podium = self.build_podium()
-                for control_podium in controls_podium:
-                    self.controls[0].controls[1].content.controls.append(control_podium)
+                self.first_attempt(idx, attempt, porcent_attempt)
             elif idx == len(attempts):
-                self.porcent_better = (better_utilization[list(better_utilization.keys())[-1]][2] / (better_utilization[list(better_utilization.keys())[-1]][1] + better_utilization[list(better_utilization.keys())[-1]][2])) * 100
-                self.average = self.average / len(attempts)
-                if porcent_attempt >= self.porcent_better:
-                    better_utilization[idx] = attempt
-                    self.porcent_better = porcent_attempt
-                if attempt[0] < better_temp[list(better_temp.keys())[-1]][0]:
-                    print(f'segundos: {attempt[0]}')
-                    better_temp[idx] = attempt
-                    self.temp_min = attempt[0]
-                controls_podium = self.build_podium()
-                for control_podium in controls_podium:
-                    self.controls[0].controls[1].content.controls.append(control_podium)
+                self.other_attempts(idx, attempt, porcent_attempt)
 
-                print(f'better_utilization: {better_utilization}')
-                print(f'better_temp: {better_temp}')
+    def first_attempt(
+        self, idx: int, attempt: list, porcent_attempt: float,
+    ) -> None:
+        """Routine for first attempt."""
+        better_utilization[idx] = attempt
+        better_temp[idx] = attempt
+        self.temp_min = better_temp[idx][0]
+        self.porcent_better = porcent_attempt
+        self.average = attempt[0]
+        controls_podium = self.build_podium()
+        for control_podium in controls_podium:
+            self.controls[0].controls[1].content.controls.append(
+                control_podium,
+            )
+
+    def other_attempts(
+        self, idx: int, attempt: list, porcent_attempt: float,
+    ) -> None:
+        """Routine for other attempts."""
+        self.porcent_better = (
+            better_utilization[list(better_utilization.keys())[-1]][2]
+            / (
+                better_utilization[list(better_utilization.keys())[-1]][1]
+                + better_utilization[list(better_utilization.keys())[-1]][
+                    2
+                ]
+            )
+        ) * 100
+        self.average = self.average / len(attempts)
+        if porcent_attempt >= self.porcent_better:
+            better_utilization[idx] = attempt
+            self.porcent_better = porcent_attempt
+        if attempt[0] < better_temp[list(better_temp.keys())[-1]][0]:
+            better_temp[idx] = attempt
+            self.temp_min = attempt[0]
+        controls_podium = self.build_podium()
+        for control_podium in controls_podium:
+            self.controls[0].controls[1].content.controls.append(
+                control_podium,
+            )
 
     def to_enter(self, event: ft.ControlEvent) -> None:
         """To enter."""
@@ -119,19 +145,35 @@ class Statistics(ft.View):
         """Build the body of controls from view."""
         return [
             ft.Text(f'{idx}º Tentativa', color='#A40000', size=30),
-            ft.Text(f'Tempo total: {attempt[0]} segundos', color='#A40000', size=30),
-            ft.Text(f'erros: {attempt[1]}, acertos: {attempt[2]}', color='#A40000', size=30),
+            ft.Text(
+                'Tempo total: ' f'{attempt[0]} segundos',
+                color='#A40000',
+                size=30,
+            ),
+            ft.Text(
+                f'erros: {attempt[1]}, acertos: {attempt[2]}',
+                color='#A40000',
+                size=30,
+            ),
             ft.Divider(color='#000000'),
         ]
-    
+
     def build_podium(self) -> list[ft.Control]:
         """Build the controls of container podium."""
         return [
             ft.Container(
                 content=ft.Column(
                     controls=[
-                        ft.Text('Média de tempo gasto', color='#A40000', size=30),
-                        ft.Text(f'Tempo: {self.average:.1f} segundos', color='#A40000', size=30),
+                        ft.Text(
+                            'Média de tempo gasto',
+                            color='#A40000',
+                            size=30,
+                        ),
+                        ft.Text(
+                            f'Tempo: {self.average:.1f} segundos',
+                            color='#A40000',
+                            size=30,
+                        ),
                     ],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     alignment=ft.MainAxisAlignment.CENTER,
@@ -145,8 +187,18 @@ class Statistics(ft.View):
                 content=ft.Column(
                     controls=[
                         ft.Text('Melhor tempo:', color='#A40000', size=30),
-                        ft.Text(f'{list(better_temp.keys())[-1]}º Tentativa', color='#A40000', size=30),
-                        ft.Text(f'Tempo total: {better_temp[list(better_temp.keys())[-1]][0]} segundos', color='#A40000', size=30),
+                        ft.Text(
+                            f'{list(better_temp.keys())[-1]}º Tentativa',
+                            color='#A40000',
+                            size=30,
+                        ),
+                        ft.Text(
+                            'Tempo total: '
+                            f'{better_temp[list(better_temp.keys())[-1]][0]}'
+                            ' segundos',
+                            color='#A40000',
+                            size=30,
+                        ),
                     ],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     alignment=ft.MainAxisAlignment.CENTER,
@@ -158,9 +210,22 @@ class Statistics(ft.View):
             ft.Container(
                 content=ft.Column(
                     controls=[
-                        ft.Text('Melhor porcentagem de acertos:', color='#A40000', size=30),
-                        ft.Text(f'{list(better_utilization.keys())[-1]}º Tentativa', color='#A40000', size=30),
-                        ft.Text(f'Porcentagem: {self.porcent_better:.1f}%', color='#A40000', size=30),
+                        ft.Text(
+                            'Melhor porcentagem de acertos:',
+                            color='#A40000',
+                            size=30,
+                        ),
+                        ft.Text(
+                            f'{list(better_utilization.keys())[-1]}º'
+                            ' Tentativa',
+                            color='#A40000',
+                            size=30,
+                        ),
+                        ft.Text(
+                            f'Porcentagem: {self.porcent_better:.1f}%',
+                            color='#A40000',
+                            size=30,
+                        ),
                     ],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     alignment=ft.MainAxisAlignment.CENTER,

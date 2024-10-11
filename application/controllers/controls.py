@@ -2,6 +2,7 @@
 
 import flet as ft
 
+
 class AppBar(ft.AppBar):
     """Appbar component."""
 
@@ -20,10 +21,10 @@ class AppBar(ft.AppBar):
                     icon_color='#A40000',
                     on_click=self.close_app,
                 ),
-                padding=ft.padding.only(right=15, top=10)
+                padding=ft.padding.only(right=15, top=10),
             ),
         ]
 
-    def close_app(self, event: ft.ControlEvent):
+    def close_app(self, event: ft.ControlEvent) -> None:
         """Close app."""
         event.page.window_close()

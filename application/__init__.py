@@ -1,8 +1,8 @@
 """Main module."""
 
 import logging
-from pathlib import Path
 from collections import defaultdict
+from pathlib import Path
 
 __title__ = '.'.join(Path(__file__).parent.parts[-2:])
 
@@ -28,7 +28,6 @@ phrases: list = [
     'So we beat on, boats against the current, borne back ceaselessly into the past',
     "Keep smiling, because life is a beautiful thing and there's so much to smile about",
 ]
-
 
 
 if __name__ == '__main__':  # pragma: no cover

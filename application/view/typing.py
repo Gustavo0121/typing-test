@@ -3,8 +3,9 @@
 from time import sleep
 
 import flet as ft
-from application import seconds, result, attempts
+from application import attempts, result, seconds
 from application.controllers.controls import AppBar
+
 
 class Typing(ft.View):
     """Typing class."""
@@ -58,7 +59,6 @@ class Typing(ft.View):
 
     def on_change(self, event: ft.ControlEvent) -> None:
         """On change."""
-
         len_field = len(self.campo_texto.value)
 
         if self.campo_texto.value[-1] == self.text[len_field - 1]:
@@ -79,16 +79,19 @@ class Typing(ft.View):
             self.update_counter(event)
 
         if len_field == len(self.text):
-            attempts.append([seconds[-1] + 1, result['erros'], result['acertos']])
-            print(f'attempts: {attempts}')
+            attempts.append([
+                seconds[-1] + 1,
+                result['erros'],
+                result['acertos'],
+            ])
             event.page.go('/statistics')
 
-    def update_counter(self, event:ft.ControlEvent) -> None:
+    def update_counter(self, event: ft.ControlEvent) -> None:
         """Update counter seconds."""
         secs = 0
         while event.page.route == '/typing':
             secs += 1
-            self.controls[0].value = f'{secs//60}:{secs%60}'
+            self.controls[0].value = f'{secs // 60}:{secs % 60}'
             event.page.update()
             sleep(1)
             seconds.append(secs)
