@@ -82,7 +82,10 @@ class Statistics(ft.View):
                 self.other_attempts(idx, attempt, porcent_attempt)
 
     def first_attempt(
-        self, idx: int, attempt: list, porcent_attempt: float,
+        self,
+        idx: int,
+        attempt: list,
+        porcent_attempt: float,
     ) -> None:
         """Routine for first attempt."""
         better_utilization[idx] = attempt
@@ -97,16 +100,17 @@ class Statistics(ft.View):
             )
 
     def other_attempts(
-        self, idx: int, attempt: list, porcent_attempt: float,
+        self,
+        idx: int,
+        attempt: list,
+        porcent_attempt: float,
     ) -> None:
         """Routine for other attempts."""
         self.porcent_better = (
             better_utilization[list(better_utilization.keys())[-1]][2]
             / (
                 better_utilization[list(better_utilization.keys())[-1]][1]
-                + better_utilization[list(better_utilization.keys())[-1]][
-                    2
-                ]
+                + better_utilization[list(better_utilization.keys())[-1]][2]
             )
         ) * 100
         self.average = self.average / len(attempts)
