@@ -28,6 +28,9 @@ phrases: list = [
     'Winning is not everything, but wanting to win is',
     'An unexamined life is not worth living',
 ]
+size_minus = 18
+size_plus = 30
+appbar_minus = 70
 
 
 if __name__ == '__main__':  # pragma: no cover

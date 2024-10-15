@@ -8,6 +8,8 @@ from application import (
     phrases,
     result,
     seconds,
+    size_minus,
+    size_plus,
 )
 from application.controllers.controls import AppBar
 
@@ -37,8 +39,8 @@ class Statistics(ft.View):
                             scroll=ft.ScrollMode.ALWAYS,
                         ),
                         border=ft.border.all(7, '#640000'),
-                        height=800,
-                        width=500,
+                        height=self.events.page.window.height - 300,
+                        width=62.5 * (self.events.page.window.height - 300) / 100,
                         bgcolor='#0F0F0F',
                     ),
                     ft.Container(
@@ -48,8 +50,8 @@ class Statistics(ft.View):
                             scroll=ft.ScrollMode.ALWAYS,
                         ),
                         border=ft.border.all(7, '#640000'),
-                        height=800,
-                        width=500,
+                        height=self.events.page.window.height - 300,
+                        width=62.5 * (self.events.page.window.height - 300) / 100,
                         bgcolor='#0F0F0F',
                     ),
                 ],
@@ -136,6 +138,7 @@ class Statistics(ft.View):
         self.average = 0
         self.controls[0].controls[1].content.controls.clear()
         event.page.update()
+        print(0.01 * ((self.controls[0].controls[1].height) * (self.controls[0].controls[1].width)) / 100)
         event.page.go('/typing')
 
     def on_hover(self, event: ft.ControlEvent) -> None:
@@ -148,16 +151,16 @@ class Statistics(ft.View):
     def build_controls(self, idx: int, attempt: list) -> list[ft.Control]:
         """Build the body of controls from view."""
         return [
-            ft.Text(f'{idx}º Tentativa', color='#A40000', size=30),
+            ft.Text(f'{idx}º Tentativa', color='#A40000', size=size_minus if self.events.page.window.height < 900 else size_plus),
             ft.Text(
                 'Tempo total: ' f'{attempt[0]} segundos',
                 color='#A40000',
-                size=30,
+                size=size_minus if self.events.page.window.height < 900 else size_plus,
             ),
             ft.Text(
                 f'erros: {attempt[1]}, acertos: {attempt[2]}',
                 color='#A40000',
-                size=30,
+                size=size_minus if self.events.page.window.height < 900 else size_plus,
             ),
             ft.Divider(color='#000000'),
         ]
@@ -171,43 +174,43 @@ class Statistics(ft.View):
                         ft.Text(
                             'Média de tempo gasto',
                             color='#A40000',
-                            size=30,
+                            size=size_minus if self.events.page.window.height < 900 else size_plus,
                         ),
                         ft.Text(
                             f'Tempo: {self.average:.1f} segundos',
                             color='#A40000',
-                            size=30,
+                            size=size_minus if self.events.page.window.height < 900 else size_plus,
                         ),
                     ],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
                 padding=ft.padding.only(top=25),
-                height=228,
+                height=self.controls[0].controls[1].height / 5,
                 width=486,
             ),
             ft.Divider(color='#000000'),
             ft.Container(
                 content=ft.Column(
                     controls=[
-                        ft.Text('Melhor tempo:', color='#A40000', size=30),
+                        ft.Text('Melhor tempo:', color='#A40000', size=size_minus if self.events.page.window.height < 900 else size_plus),
                         ft.Text(
                             f'{list(better_temp.keys())[-1]}º Tentativa',
                             color='#A40000',
-                            size=30,
+                            size=size_minus if self.events.page.window.height < 900 else size_plus,
                         ),
                         ft.Text(
                             'Tempo total: '
                             f'{better_temp[list(better_temp.keys())[-1]][0]}'
                             ' segundos',
                             color='#A40000',
-                            size=30,
+                            size=size_minus if self.events.page.window.height < 900 else size_plus,
                         ),
                     ],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
-                height=228,
+                height=self.controls[0].controls[1].height / 3.5,
                 width=486,
             ),
             ft.Divider(color='#000000'),
@@ -215,26 +218,26 @@ class Statistics(ft.View):
                 content=ft.Column(
                     controls=[
                         ft.Text(
-                            'Melhor porcentagem de acertos:',
+                            'Maior taxa de acertos:',
                             color='#A40000',
-                            size=30,
+                            size=size_minus if self.events.page.window.height < 900 else size_plus,
                         ),
                         ft.Text(
                             f'{list(better_utilization.keys())[-1]}º'
                             ' Tentativa',
                             color='#A40000',
-                            size=30,
+                            size=size_minus if self.events.page.window.height < 900 else size_plus,
                         ),
                         ft.Text(
                             f'Porcentagem: {self.porcent_better:.1f}%',
                             color='#A40000',
-                            size=30,
+                            size=size_minus if self.events.page.window.height < 900 else size_plus,
                         ),
                     ],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
-                height=228,
+                height=self.controls[0].controls[1].height / 3.5,
                 width=486,
             ),
         ]
