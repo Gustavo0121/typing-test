@@ -21,11 +21,7 @@ if os.getenv('DEBUG_MODE'):
 def main(page: ft.Page) -> None:
     """Main process."""
     page.title = 'Typing test'
-    page.window.min_width = 1280
-    page.window.min_height = 720
     page.padding = 0
-    page.window.width = page.window.min_width
-    page.window.height = page.window.min_height
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.theme_mode = ft.ThemeMode.DARK
