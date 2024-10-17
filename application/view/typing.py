@@ -3,7 +3,7 @@
 from time import sleep
 
 import flet as ft
-from application import attempts, result, seconds
+from application import attempts, result, seconds, words
 from application.controllers.controls import AppBar
 
 
@@ -83,6 +83,7 @@ class Typing(ft.View):
                 seconds[-1] + 1,
                 result['erros'],
                 result['acertos'],
+                len(self.text.split())
             ])
             event.page.go('/statistics')
 
