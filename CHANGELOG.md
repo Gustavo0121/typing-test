@@ -10,6 +10,10 @@ This file was automatically generated for [incolume.py.changelog](https://github
 ---
 
 
+## [0.3.1]	 &#8212; 	2024-10-17:
+### Fixed
+  - Corrigido erro de cobertura da aplicação;
+
 ## [0.3.0]	 &#8212; 	2024-10-17:
 ### Changed
   - Responsividade alterada para ajustar em telas menores como notebooks;
@@ -31,3 +35,4 @@ This file was automatically generated for [incolume.py.changelog](https://github
 
 [0.2.0]: https://github.com/Gustavo0121/typing-test/compare/0.1.0...0.2.0
 [0.3.0]: https://github.com/Gustavo0121/typing-test/compare/0.2.0...0.3.0
+[0.3.1]: https://github.com/Gustavo0121/typing-test/compare/0.3.0...0.3.1
