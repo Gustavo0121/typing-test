@@ -31,6 +31,7 @@ phrases: list = [
 size_minus = 18
 size_plus = 30
 appbar_minus = 70
+HEIGHT_NOTEBOOK = 900
 
 
 if __name__ == '__main__':  # pragma: no cover
