@@ -31,6 +31,7 @@ phrases: list = [
 size_minus = 18
 size_plus = 30
 appbar_minus = 70
+words = 0
 HEIGHT_NOTEBOOK = 900
 
 
