@@ -16,6 +16,7 @@ pytest = "^8.3.3"
 pytest-cov = "^5.0.0"
 taskipy = "^1.13.0"
 pyinstaller = "^6.10.0"
+incolume-py-changelog = "^0.8.0"
 
 
 [tool.poetry.group.docs.dependencies]
@@ -264,3 +265,8 @@ parametrize-values-row-type = "tuple"
 
 [tool.ruff.lint.pylint]
 max-args = 4
+
+[tool.taskipy.variables]
+path = "application/ tests/"
+CHANGELOGFILE = "CHANGELOG.md"
+URLCOMPARE = "https://github.com/Gustavo0121/typing-test/compare"

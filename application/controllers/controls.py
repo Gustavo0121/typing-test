@@ -1,7 +1,7 @@
 """Componentes."""
 
 import flet as ft
-from application import appbar_minus
+from application import HEIGHT_NOTEBOOK, appbar_minus
 
 
 class AppBar(ft.AppBar):
@@ -12,7 +12,11 @@ class AppBar(ft.AppBar):
         super().__init__()
         self.events = events
         self.bgcolor = '#181717'
-        self.toolbar_height = appbar_minus if self.events.page.window.height < 900 else 100
+        self.toolbar_height = (
+            appbar_minus
+            if self.events.page.window.height < HEIGHT_NOTEBOOK
+            else 100
+        )
 
         self.actions = [
             ft.Container(
