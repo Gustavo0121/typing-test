@@ -184,6 +184,13 @@ class Statistics(ft.View):
                 if self.events.page.window.height < HEIGHT_NOTEBOOK
                 else size_plus,
             ),
+            ft.Text(
+                f'wpm: {int((attempt[3] * 60) / attempt[0])}',
+                color='#A40000',
+                size=size_minus
+                if self.events.page.window.height < HEIGHT_NOTEBOOK
+                else size_plus,
+            ),
             ft.Divider(color='#000000'),
         ]
 
@@ -194,7 +201,7 @@ class Statistics(ft.View):
                 content=ft.Column(
                     controls=[
                         ft.Text(
-                            'Média de tempo gasto',
+                            'Média de tempo gasto:',
                             color='#A40000',
                             size=size_minus
                             if self.events.page.window.height < HEIGHT_NOTEBOOK
