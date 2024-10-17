@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "typing-test"
-version = "0.3.0a0"
+version = "0.3.0"
 description = ""
 authors = ["Gustavo0121 <gus0512san@gmail.com>"]
 readme = "README.md"
